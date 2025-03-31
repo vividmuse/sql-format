@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL 格式化与压缩工具</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入 highlight.js 样式 (选择一个你喜欢的主题) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔧</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <h1>SQL 格式化与压缩</h1>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="format">格式化/压缩</button>
+            <button class="tab-btn" data-tab="diff">文本对比</button>
+        </div>
+
+        <div class="tab-content active" id="format-tab">
+            <div class="options">
+                <label for="dialect-select">SQL 方言:</label>
+                <select id="dialect-select">
+                    <option value="mysql" selected>MySQL</option>
+                    <option value="sqlite">SQLite</option>
+                    <option value="sql">Standard SQL</option>
+                    <option value="mariadb">MariaDB</option>
+                    <option value="postgresql">PostgreSQL</option>
+                    <option value="sqlserver">MS SQL Server (TSQL)</option>
+                    <option value="plsql">Oracle PL/SQL</option>
+                    <!-- 可以根据 sql-formatter 支持添加更多 -->
+                </select>
+            </div>
+
+            <div class="editor-area">
+                <div class="input-section">
+                    <h2>输入 SQL:</h2>
+                    <textarea id="sql-input" rows="15" placeholder="在此处粘贴或输入 SQL 语句..."></textarea>
+                </div>
+
+                <div class="output-section">
+                    <h2>处理结果:</h2>
+                    <div class="output-wrapper">
+                        <pre><code id="sql-output" class="sql"></code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="format-btn">格式化</button>
+                <button id="compress-btn">压缩</button>
+                <button id="copy-btn" data-tooltip="复制结果">复制</button>
+                <button id="clear-btn">清空</button>
+            </div>
+
+            <div id="copy-feedback" class="feedback" aria-live="polite"></div>
+        </div>
+
+        <div class="tab-content" id="diff-tab">
+            <div class="diff-container">
+                <div class="diff-input-section">
+                    <h2>原始文本:</h2>
+                    <textarea id="diff-input-1" rows="15" placeholder="在此处粘贴或输入原始文本..."></textarea>
+                </div>
+                <div class="diff-input-section">
+                    <h2>对比文本:</h2>
+                    <textarea id="diff-input-2" rows="15" placeholder="在此处粘贴或输入需要对比的文本..."></textarea>
+                </div>
+                <div class="diff-output-section">
+                    <h2>对比结果:</h2>
+                    <div class="diff-output-wrapper">
+                        <pre><code id="diff-output"></code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="diff-controls">
+                <button id="diff-btn">对比</button>
+                <button id="diff-copy-btn">复制结果</button>
+                <button id="diff-clear-btn">清空</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入 highlight.js 核心库和 SQL 语言包 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+
+    <!-- 引入 sql-formatter (使用 UMD 版本，方便在浏览器直接使用) -->
+    <script src="https://cdn.jsdelivr.net/npm/sql-formatter@15.3.2/dist/sql-formatter.min.js"></script>
+
+    <!-- 引入你的 JavaScript 逻辑 -->
+    <script src="script.js"></script>
+</body>
+</html>
